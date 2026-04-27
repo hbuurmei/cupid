@@ -1,0 +1,106 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cupid"
+version = "0.1.0"
+requires-python = "==3.10.*"
+dependencies = [
+    # PyTorch stack — resolved from pytorch-cu121 index (see [tool.uv.sources])
+    # pytorch3d must be installed separately after uv sync (see below)
+    "torch==2.2.2",
+    "torchvision==0.17.2",
+
+    # Numerical
+    "numpy==1.23.3",
+    "numba==0.56.4",
+    "scipy==1.9.1",
+    "scikit-learn==1.6.1",
+    "scikit-image==0.19.3",
+    "scikit-video==1.1.11",
+
+    # Vision / media
+    "opencv-python~=4.6.0",
+    "imageio==2.22.0",
+    "imageio-ffmpeg==0.4.7",
+    "imagecodecs==2022.9.26",
+    "av>=10.0",
+    "pytorchvideo==0.1.5",
+
+    # Hugging Face / diffusion
+    "diffusers==0.11.1",
+    "transformers==4.34.1",
+    "tokenizers==0.14.1",
+    "huggingface-hub==0.17.3",
+    "accelerate==0.21.0",
+    "datasets==2.6.1",
+
+    # RL / simulation
+    "gym>=0.21,<0.26",
+    "pymunk==6.2.1",
+    "mujoco==3.2.6",
+    "mujoco-py==2.1.2.14",
+    "dm-control==1.0.9",
+    "pygame==2.1.2",
+    # pybullet-svl must be installed separately after uv sync (see UV_INSTALL.md)
+    "robosuite",
+    "robomimic==0.2.0",
+    "r3m",
+
+    # Storage / serialization
+    "zarr==2.12.0",
+    "numcodecs==0.10.2",
+    "h5py==3.7.0",
+    "dill==0.3.5.1",
+    "einops==0.4.1",
+
+    # Config / experiment tracking
+    "hydra-core==1.2.0",
+    "wandb==0.13.3",
+    "tensorboard==2.10.1",
+    "tensorboardx==2.5.1",
+    "ray[default,tune]==2.2.0",
+
+    # Influence functions
+    "traker",
+
+    # Build tools (needed for no-build-isolation packages like pytorch3d)
+    "setuptools<70",
+    "wheel",
+
+    # Utilities
+    "cffi==1.15.1",
+    "ipykernel~=6.16",
+    "matplotlib>=3.7",
+    "tqdm==4.64.1",
+    "threadpoolctl==3.1.0",
+    "shapely==1.8.4",
+    "cython==0.29.32",
+    "termcolor==2.0.1",
+    "psutil==5.9.2",
+    "click==8.0.4",
+    "boto3==1.24.96",
+    "cmake==3.24.3",
+    "seaborn==0.13.2",
+    "tokenize-rt==6.1.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.uv]
+# robosuite 1.2.0 caps numba at 0.53.1 but that constraint is stale; override it
+override-dependencies = ["numba>=0.56.4"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu121" }
+torchvision = { index = "pytorch-cu121" }
+robosuite = { url = "https://github.com/cheng-chi/robosuite/archive/277ab9588ad7a4f4b55cf75508b44aa67ec171f0.tar.gz" }
+r3m = { url = "https://github.com/facebookresearch/r3m/archive/b2334e726887fa0206962d7984c69c5fb09cceab.tar.gz" }
+traker = { path = "third_party/trak", editable = true }
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
