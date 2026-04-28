@@ -7,10 +7,10 @@ name = "cupid"
 version = "0.1.0"
 requires-python = "==3.9.*"
 dependencies = [
-    # PyTorch stack — resolved from pytorch-cu121 index (see [tool.uv.sources])
+    # PyTorch stack — resolved from pytorch-cu129 index (see [tool.uv.sources])
     # pytorch3d must be installed separately after uv sync (see below)
-    "torch==2.2.2",
-    "torchvision==0.17.2",
+    "torch==2.8.0",
+    "torchvision==0.23.0",
 
     # Numerical
     "numpy==1.23.3",
@@ -37,7 +37,7 @@ dependencies = [
     "datasets==2.6.1",
 
     # RL / simulation
-    "gym>=0.21,<0.26",
+    "gym==0.26.2",
     "pymunk==6.2.1",
     "mujoco==3.2.6",
     "mujoco-py==2.1.2.14",
@@ -94,13 +94,13 @@ where = ["."]
 override-dependencies = ["numba>=0.56.4"]
 
 [tool.uv.sources]
-torch = { index = "pytorch-cu121" }
-torchvision = { index = "pytorch-cu121" }
+torch = { index = "pytorch-cu129" }
+torchvision = { index = "pytorch-cu129" }
 robosuite = { url = "https://github.com/cheng-chi/robosuite/archive/277ab9588ad7a4f4b55cf75508b44aa67ec171f0.tar.gz" }
 r3m = { url = "https://github.com/facebookresearch/r3m/archive/b2334e726887fa0206962d7984c69c5fb09cceab.tar.gz" }
 traker = { path = "third_party/trak", editable = true }
 
 [[tool.uv.index]]
-name = "pytorch-cu121"
-url = "https://download.pytorch.org/whl/cu121"
+name = "pytorch-cu129"
+url = "https://download.pytorch.org/whl/cu129"
 explicit = true
