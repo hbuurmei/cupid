@@ -91,9 +91,9 @@ function train_policy {
 # Tasks.
 TASKS=(
     ## Official tasks.
-    "lift_mh"
+    # "lift_mh"
     # "square_mh"
-    # "transport_mh"
+    "transport_mh"
 
     ## Supported tasks.
     # "can_mh"
