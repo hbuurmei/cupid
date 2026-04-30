@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.mujoco/mujoco210/bin:/usr/lib/nvidia
+export MUJOCO_PY_MUJOCO_PATH=$HOME/.mujoco/mujoco210
 
-DEBUG=1
+DEBUG=0
 SLURM_HOSTNAME="<enter_hostname>"
 SLURM_SBATCH_FILE="<enter_sbatch_file>"
 
@@ -323,5 +325,5 @@ state="low_dim"
 train_policy_with_curation
 
 # Image-state-based experiments.
-state="image"
+# state="image"
 # train_policy_with_curation

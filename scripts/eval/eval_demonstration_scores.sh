@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.mujoco/mujoco210/bin:/usr/lib/nvidia
+export MUJOCO_PY_MUJOCO_PATH=$HOME/.mujoco/mujoco210
 
-DEBUG=1
+DEBUG=0
 SLURM_HOSTNAME="<enter_hostname>"
 SLURM_SBATCH_FILE="<enter_sbatch_file>"
 
@@ -84,9 +86,9 @@ function eval_demonstration_scores_over_seeds {
 # Tasks.
 TASKS=(
     ## Official tasks.
-    "lift_mh"
+    # "lift_mh"
     # "square_mh"
-    # "transport_mh"
+    "transport_mh"
 
     ## Supported tasks.
     # "can_mh"
@@ -149,8 +151,8 @@ train_filter=1  # Official: Used for demo filtering experiments.
 train_select=0  # Official: Used for demo selection experiments.
 if [[ $train_filter == 1 ]]; then
     result_date="default"
-    eval_date="<enter_policy_eval_date>"
-    train_date="<enter_policy_train_date>"
+    eval_date="04-29-2026"
+    train_date="04-27-2026"
 elif [[ $train_select == 1 ]]; then
     result_date="default"
     eval_date="<enter_policy_eval_date>"
@@ -168,5 +170,5 @@ state="low_dim"
 eval_demonstration_scores_over_seeds
 
 # Image-state-based experiments.
-state="image"
+# state="image"
 # eval_demonstration_scores_over_seeds
